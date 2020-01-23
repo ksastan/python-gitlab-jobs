@@ -2,14 +2,12 @@ import requests
 import json
 import argparse
 
-global parser
-
 
 def get_parameters():
-    global parser
     parser = argparse.ArgumentParser(description='Enter --url and --token')
     parser.add_argument('url', help='Gitlab api URL')
     parser.add_argument('token', help='Gitlab user token id')
+    return parser.parse_args()
 
 
 def gitlab_jobs_status(tokenid, gitlab_url):
@@ -57,6 +55,5 @@ def gitlab_jobs_status(tokenid, gitlab_url):
 
 
 if __name__ == '__main__':
-    get_parameters()
-    args = parser.parse_args()
+    args = get_parameters()
     gitlab_jobs_status(args.token, args.url)
